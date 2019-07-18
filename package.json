@@ -1,0 +1,21 @@
+{
+  "name": "github-login",
+  "version": "1.0.0",
+  "description": "3-legged oAuth login with GitHub.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shiya Luo <luo.shiya@gmail.com> (http://www.shiyaluo.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "nodemon": "^1.14.11",
+    "randomstring": "^1.1.5",
+    "request": "^2.88.0"
+  },
+  "repository": "https://github.com/shiya/github-login.git"
+}
