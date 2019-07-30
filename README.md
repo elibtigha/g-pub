@@ -14,13 +14,11 @@ CLIENT_SECRET=YOUR_CLIENT_SECRET
 Install dependencies
 
 ```bash
-yarn
+yarn add dotenv express request randomstring express-session
 ```
 
 Run
 
 ```bash
 yarn start
-
-yarn add dotenv express request randomstring express-session
 ```
