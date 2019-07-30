@@ -1,0 +1,79 @@
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : ElizabethLaptop
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+   DNS Suffix Search List. . . . . . : corp.microsoft.com
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : corp.microsoft.com
+   Description . . . . . . . . . . . : Surface Ethernet Adapter
+   Physical Address. . . . . . . . . : 28-16-A8-04-06-85
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   IPv6 Address. . . . . . . . . . . : 2001:4898:d8:c0:f845:d3a5:1e85:687a(Preferred) 
+   Temporary IPv6 Address. . . . . . : 2001:4898:d8:c0:481f:caf6:e0d0:f2f2(Preferred) 
+   Link-local IPv6 Address . . . . . : fe80::f845:d3a5:1e85:687a%15(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 10.35.36.86(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.252.0
+   Lease Obtained. . . . . . . . . . : Monday, July 29, 2019 11:02:28 AM
+   Lease Expires . . . . . . . . . . : Tuesday, August 6, 2019 11:02:41 AM
+   Default Gateway . . . . . . . . . : fe80::200:5eff:fe00:203%15
+                                       10.35.36.1
+   DHCP Server . . . . . . . . . . . : 10.221.228.18
+   DHCPv6 IAID . . . . . . . . . . . : 623384232
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-24-9A-DA-12-B8-31-B5-79-12-FF
+   DNS Servers . . . . . . . . . . . : 10.50.10.50
+                                       10.50.50.50
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+   Connection-specific DNS Suffix Search List :
+                                       corp.microsoft.com
+
+Wireless LAN adapter Local Area Connection* 1:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter
+   Physical Address. . . . . . . . . : BA-31-B5-79-13-FE
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Local Area Connection* 2:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Wi-Fi Direct Virtual Adapter #2
+   Physical Address. . . . . . . . . : BA-31-B5-79-16-FE
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Wireless LAN adapter Wi-Fi:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Marvell AVASTAR Wireless-AC Network Controller
+   Physical Address. . . . . . . . . : B8-31-B5-79-12-FF
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Ethernet adapter Bluetooth Network Connection:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Bluetooth Device (Personal Area Network)
+   Physical Address. . . . . . . . . : B8-31-B5-79-13-00
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+
+Pinging google.com [2607:f8b0:400a:808::200e] with 32 bytes of data:
+Reply from 2607:f8b0:400a:808::200e: time=2ms 
+Reply from 2607:f8b0:400a:808::200e: time=1ms 
+
+Ping statistics for 2607:f8b0:400a:808::200e:
+    Packets: Sent = 2, Received = 2, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 2ms, Average = 1ms

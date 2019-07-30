@@ -1,3 +1,4 @@
+// Required modules
 require('dotenv').config();
 const express = require('express');
 const app = express();
@@ -6,12 +7,18 @@ const request = require('request');
 const qs = require('querystring');
 const url = require('url');
 const randomString = require('randomstring');
-// const shell = require('shelljs');
 const JSONObject = require('JSONObject');
 
-
+// Local hostS
 const port = process.env.PORT || 3000;
 const redirect_uri = process.env.HOST + '/redirect';
+
+// Azure Blob Storage Account Information
+// var blobUri = 'https://' + 'STORAGE_ACCOUNT' + '.blob.core.windows.net';
+// var blobService = AzureStorage.Blob.createBlobServiceWithSas(blobUri, 'SAS_TOKEN');
+
+
+
 
 app.use(express.static('views'));
 app.use(
@@ -24,9 +31,16 @@ app.use(
 );
 
 
+// Home page
 app.get('/', (req, res, next) => {
   res.sendFile(__dirname + '/index.html');
 });
+
+
+app.get('/done', (req, res, next) => {
+  res.sendFile(__dirname + '/done.html');
+});
+
 
 
 app.get('/login', (req, res, next) => {
@@ -44,10 +58,9 @@ app.get('/login', (req, res, next) => {
 
 
 app.all('/redirect', (req, res) => {
-  console.log('Request sent by GitHub: ');
-  console.log(req.query);
+  // console.log('Request sent by GitHub: ');
+  // console.log(req.query);
   const code = req.query.code;
-  console.log(code)
   const returnedState = req.query.state;
   if (req.session.csrf_string === returnedState) {
     request.post(
@@ -64,15 +77,9 @@ app.all('/redirect', (req, res) => {
           })
       },
       (error, response, body) => {
-        // The response will contain your new access token
-        // this is where you store the token somewhere safe
-        // for this example we're just storing it in session
-        console.log('Your Access Token: ');
-        console.log(qs.parse(body));
+        // console.log('Your Access Token: ');
+        // console.log(qs.parse(body));
         req.session.access_token = qs.parse(body).access_token;
-
-        // Redirects user to /user page so we can use
-        // the token to get some data.
         res.redirect('/user');
       }
     );
@@ -93,31 +100,46 @@ app.get('/user', (req, res) => {
       }
     },
     (error, response, body) => {
-
       var output = "<p>You're logged in! Here's all your repos on GitHub: </p>";
       var obj = JSON.parse(body);
-
-      output += "<form target=\"_blank\" action=\"localhost:3000\" method=\"POST\">";
+      output += "<form method=\"get\" action=\"/output\">";
 
       for (i = 0; i < obj.length; i++) {
-        output += "<input type=\"checkbox\" name=";
-        output += "\"" + obj[i].name + "\" value=\"" + obj[i].html_url + "\"> " + obj[i].name + "<br>";
+        output += "<a href = \"" + obj[i].html_url + "\"><input type=\"checkbox\" name=";
+        output += "\"" + obj[i].name + "\" value=\"" + obj[i].html_url + "\"> " + obj[i].name + "<br></a>";
       }
-      output += "<input type=\"submit\" value=\"Submit\"></form>";
-      output += "<p>Go back to <a href=\"./\">log in page</a>.</p>";
 
+      output += "<input name=\"submit\" type=\"submit\" method=\"post\" value=\"scan\" action=\"/\"></form>";
+      output += "<p>Go back to <a href=\"./\">log in page</a>.</p>";
       res.send(output);
-      // res.redirect('/action.php');
-      // shell.exec('./path_to_your_file')
     }
   );
 });
 
-// app.get('/action', (req, res) => {
 
-// })
-
+app.get('/output', (req, res) => {
+  const sub = req.query;
+  function replacer(key, value) {
+    if (key === 'submit') {
+      return undefined;
+    }
+    return value;
+  }
+  const userStr = JSON.stringify(sub, replacer);
+  const userStr2 = JSON.parse(userStr);
+  for (var key in userStr2) {
+    console.log(key + " -> " + userStr2[key]);
+  }
+  res.redirect('/done');
+})
 
 app.listen(port, () => {
   console.log('Server listening at port ' + port);
 });
+
+
+// ECHO OFF
+// for /F "tokens=*" %%A in (repos.csv) do git clone https://github.com/elibtigha/%%A.git %%A
+// PAUSE
+
+
