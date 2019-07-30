@@ -24,4 +24,3 @@ yarn start
 
 yarn add dotenv express request randomstring express-session
 ```
-"# landing2" 
