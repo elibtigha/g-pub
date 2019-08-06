@@ -17,9 +17,6 @@ const redirect_uri = process.env.HOST + '/redirect';
 // var blobUri = 'https://' + 'STORAGE_ACCOUNT' + '.blob.core.windows.net';
 // var blobService = AzureStorage.Blob.createBlobServiceWithSas(blobUri, 'SAS_TOKEN');
 
-
-
-
 app.use(express.static('views'));
 app.use(
   session({
@@ -77,8 +74,6 @@ app.all('/redirect', (req, res) => {
           })
       },
       (error, response, body) => {
-        // console.log('Your Access Token: ');
-        // console.log(qs.parse(body));
         req.session.access_token = qs.parse(body).access_token;
         res.redirect('/user');
       }
@@ -99,21 +94,45 @@ app.get('/user', (req, res) => {
         'type': "all"
       }
     },
+
+    // (error, response, head) => {
+    //   var output = "<style>h1 {font-family: Trebuchet MS; font-size: 160px;}</style>";
+    //   res.send(output);
+    // }
     (error, response, body) => {
-      var output = "<p>You're logged in! Here's all your repos on GitHub: </p>";
+      var output = "<div class=\"container-fluid\"><nav style=\"margin-bottom: 0; background-color: #22325a; z-index: 9999; border: 0; letter-spacing: 3px; border-radius: 0;\" class=\"navbar navbar-default navbar-fixed-top\">";
+      output += "<div class=\"navbar-header\"><button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\"";
+      output += "data-target=\"#myNavbar\"><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span><span class=\"icon-bar\"></span></button><a style=\"color: #fff !important; font-family: 'Trebuchet MS'; font-size: 45px !important; padding-right: 50px; padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" class=\"navbar-brand\" href=\"#\">GitScan</a></div>";
+      // every navbar element except "gitscan"
+      output += "<div class=\"collapse navbar-collapse\" id=\"myNavbar\"><ul class=\"nav navbar-nav navbar-right\"><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#about\">";
+      output += "About</a></li><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#doc\">";
+      output += "Doc</a></li><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#contact\">Contact</a></li></ul></div></nav>";
+      output += "<br><br><br><br><br><h1 style=\"font-family: MS UI Gothic; color: #22325b\" align=\"center\">Select the repos you wish to scan: </h1><br><br>";
+
       var obj = JSON.parse(body);
+      output += "<div class=\"container\">";
       output += "<form method=\"get\" action=\"/output\">";
 
       for (i = 0; i < obj.length; i++) {
-        output += "<a href = \"" + obj[i].html_url + "\"><input type=\"checkbox\" name=";
-        output += "\"" + obj[i].name + "\" value=\"" + obj[i].html_url + "\"> " + obj[i].name + "<br></a>";
+        output += " <div style=\"text-align:center;\"><input type=\"checkbox\" name=";
+        output += "\"" + obj[i].name + "\" value=\"" + obj[i].html_url + "\"> " + obj[i].name + "</div><br></a>";
       }
-
-      output += "<input name=\"submit\" type=\"submit\" method=\"post\" value=\"scan\" action=\"/\"></form>";
-      output += "<p>Go back to <a href=\"./\">log in page</a>.</p>";
+      output += "<br><div style=\"text-align:center;\"><input style=\"font-size: 24px;\" class=\"btn btn-success\" name=\"submit\" type=\"submit\" method=\"post\" value=\"Scan selected repos\" action=\"/\"></div></form>";
+      
+      // the following is everything in the head before the style
+      output += "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">";
+      output += "<link href=\"mastersheet.css\" rel=\"stylesheet\"></link>";
+      output += "<title>GitScan - Scan Repos</title>"
+      output += "<script src=\"azure-storage.blob.js\"></script><meta charset=\"utf-8\" /><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"></meta>";
       res.send(output);
+
+      // style=\"color: #fff !important; font-family: 'Trebuchet MS'; font-size: 45px !important; padding-right: 50px; padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\"
     }
   );
+});
+
+app.get('/done', (req, res, next) => {
+  res.sendFile(__dirname + '/done.html');
 });
 
 
