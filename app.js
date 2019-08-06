@@ -107,17 +107,19 @@ app.get('/user', (req, res) => {
       output += "<div class=\"collapse navbar-collapse\" id=\"myNavbar\"><ul class=\"nav navbar-nav navbar-right\"><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#about\">";
       output += "About</a></li><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#doc\">";
       output += "Doc</a></li><li><a style=\"color: #fff ;font-family: MS UI Gothic;font-size: 24px !important;padding-right: 50px;padding-left: 50px;padding-top: 25px;padding-bottom: 25px;\" href=\"#contact\">Contact</a></li></ul></div></nav>";
-      output += "<br><br><br><br><br><h1 style=\"font-family: MS UI Gothic; color: #22325b\" align=\"center\">Select the repos you wish to scan: </h1><br><br>";
+      output += "<br><br><br><br><br><h1 style=\"font-family: MS UI Gothic; color: #22325b\" align=\"center\">Select the repositories you wish to scan: </h1><br><br>";
 
       var obj = JSON.parse(body);
       output += "<div class=\"container\">";
       output += "<form method=\"get\" action=\"/output\">";
 
+      // repos
       for (i = 0; i < obj.length; i++) {
-        output += " <div style=\"text-align:center;\"><input type=\"checkbox\" name=";
+        output += " <div style=\"text-align:center; color: #000 ;font-family: MS UI Gothic;font-size: 18px;\"><input type=\"checkbox\" style=\"width:30px; height:14px;\" name=";
         output += "\"" + obj[i].name + "\" value=\"" + obj[i].html_url + "\"> " + obj[i].name + "</div><br></a>";
       }
-      output += "<br><div style=\"text-align:center;\"><input style=\"font-size: 24px;\" class=\"btn btn-success\" name=\"submit\" type=\"submit\" method=\"post\" value=\"Scan selected repos\" action=\"/\"></div></form>";
+      // submission button
+      output += "<br><div style=\"text-align:center;\"><input style=\"font-size: 24px;\" class=\"btn btn-success\" style=\"background-color: #6CC644; border-color: #6CC644;\" name=\"submit\" type=\"submit\" method=\"post\" value=\"Scan selected repos\" action=\"/\"></div></form>";
       
       // the following is everything in the head before the style
       output += "<link rel=\"stylesheet\" type=\"text/css\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">";
